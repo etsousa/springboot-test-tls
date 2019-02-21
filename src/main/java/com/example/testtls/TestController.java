@@ -28,14 +28,12 @@ public class TestController {
 	private String nextEndpoint;
 
 	@GetMapping(path = "/hello")
-	@PreAuthorize("hasAnyAuthority('ROLE_USER')")
 	public ResponseEntity<String> getAuthorizedResponse() {
 		return ResponseEntity.ok("Hello " + SecurityContextUtils.getUserName() + " from " + svcName);
 	}
 	
 	
 	@GetMapping(path = "/helloForAll")
-	@PreAuthorize("hasAnyAuthority('ROLE_USER')")
 	public ResponseEntity<String> getAuthorizedResponseFromBothServices() {
 		String svc2Response = oAuth2RestTemplate.getForObject(nextEndpoint, String.class);
 		StringBuilder bd = new StringBuilder();
